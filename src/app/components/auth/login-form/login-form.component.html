@@ -1,0 +1,92 @@
+<div class="form-container login-form" [class.loading]="isLoggingIn()">
+  <div class="form-header">
+    <div class="form-icon">
+      <i class="fas fa-lock"></i>
+      <h2>Welcome Back</h2>
+    </div>
+    <p>Please enter your details to sign in</p>
+  </div>
+
+  <form (ngSubmit)="handleLogin()">
+    <div class="input-group">
+      <label>
+        <i class="fas fa-envelope"></i>
+        Email Address
+      </label>
+      <input
+        type="email"
+        [(ngModel)]="loginEmail"
+        name="loginEmail"
+        placeholder="elseady@example.com"
+        required
+        [disabled]="isLoggingIn()"
+        autocomplete="email"
+      />
+    </div>
+
+    <div class="input-group">
+      <label>
+        <i class="fas fa-key"></i>
+        Password
+      </label>
+      <div class="password-wrapper">
+        <input
+          [type]="showPassword() ? 'text' : 'password'"
+          [(ngModel)]="loginPassword"
+          name="loginPassword"
+          placeholder="Enter your password"
+          required
+          [disabled]="isLoggingIn()"
+          autocomplete="current-password"
+        />
+        <button
+          type="button"
+          class="toggle-password"
+          (click)="togglePasswordVisibility()"
+          [disabled]="isLoggingIn()"
+        >
+          <i [class]="showPassword() ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="form-footer">
+      <label class="checkbox">
+        <input
+          type="checkbox"
+          [(ngModel)]="rememberMe"
+          name="rememberMe"
+          [disabled]="isLoggingIn()"
+        />
+        <span>Remember me</span>
+      </label>
+      <a href="#" class="forgot-link">Forgot password?</a>
+    </div>
+
+    <button
+      type="submit"
+      class="btn-primary"
+      [disabled]="isLoggingIn()"
+    >
+      @if (isLoggingIn()) {
+        <i class="fas fa-spinner fa-spin"></i>
+        <span>Signing In...</span>
+      } @else {
+        <span>Sign In</span>
+        <i class="fas fa-sign-in-alt"></i>
+      }
+    </button>
+  </form>
+
+  <div class="switch-form">
+    <p>Don't have an account?</p>
+    <button
+      type="button"
+      class="switch-btn"
+      (click)="onSwitchToSignup()"
+      [disabled]="isLoggingIn()"
+    >
+      Create Account <i class="fas fa-user-plus"></i>
+    </button>
+  </div>
+</div>

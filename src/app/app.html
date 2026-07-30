@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="bg-animation">
+    <div class="circle circle-1"></div>
+    <div class="circle circle-2"></div>
+    <div class="circle circle-3"></div>
+    <div class="circle circle-4"></div>
+  </div>
+
+  <div class="main-wrapper">
+    <div class="welcome-section">
+      <app-welcome-section [currentMode]="currentMode()" [animation]="welcomeAnimation()" />
+    </div>
+
+    <div class="auth-section">
+      @if (showLoginForm()) {
+        <app-login-form
+          [class]="getAnimationClass(formAnimation())"
+          (switchToSignup)="switchToSignup()"
+        />
+      }
+
+      @if (showSignupForm()) {
+        <app-signup-form
+          [class]="getAnimationClass(formAnimation())"
+          (switchToLogin)="switchToLogin()"
+        />
+      }
+    </div>
+  </div>
+
+  <div class="toast-container">
+    @for (toast of toasts(); track toast.id) {
+      <app-toast [toast]="toast" (onClose)="toastService.removeToast($event)" />
+    }
+  </div>
+</div>

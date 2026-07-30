@@ -1,0 +1,155 @@
+<div class="form-container signup-form" [class.loading]="isSigningUp()">
+  <div class="form-header">
+    <div class="form-icon">
+      <i class="fas fa-user-plus"></i>
+      <h2>Create Account</h2>
+    </div>
+    <p>Join our community today</p>
+  </div>
+
+  <form (ngSubmit)="handleSignup()">
+    <div class="input-group">
+      <label>
+        <i class="fas fa-user"></i>
+        Full Name
+      </label>
+      <input
+        type="text"
+        [(ngModel)]="signupName"
+        name="signupName"
+        placeholder="Mahmoud ElSeady"
+        required
+        [disabled]="isSigningUp()"
+        autocomplete="name"
+      />
+    </div>
+
+    <div class="input-group">
+      <label>
+        <i class="fas fa-envelope"></i>
+        Email Address
+      </label>
+      <input
+        type="email"
+        [(ngModel)]="signupEmail"
+        name="signupEmail"
+        placeholder="elseady@example.com"
+        required
+        [disabled]="isSigningUp()"
+        autocomplete="email"
+      />
+    </div>
+
+    <div class="input-group">
+      <label>
+        <i class="fas fa-key"></i>
+        Password
+        <span class="password-hint">(min 6 characters)</span>
+      </label>
+      <div class="password-wrapper">
+        <input
+          [type]="showPassword() ? 'text' : 'password'"
+          [(ngModel)]="signupPassword"
+          name="signupPassword"
+          placeholder="Create a password"
+          required
+          [disabled]="isSigningUp()"
+          autocomplete="new-password"
+          (input)="validatePasswordStrength(signupPassword())"
+        />
+        <button
+          type="button"
+          class="toggle-password"
+          (click)="togglePasswordVisibility()"
+          [disabled]="isSigningUp()"
+        >
+          <i [class]="showPassword() ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+        </button>
+      </div>
+      @if (signupPassword().length > 0) {
+        <div class="password-strength">
+          <div class="strength-bar">
+            <div
+              class="strength-fill"
+              [style.width.%]="(validatePasswordStrength(signupPassword()).score / 6) * 100"
+              [class]="'strength-' + validatePasswordStrength(signupPassword()).score"
+            ></div>
+          </div>
+          <span class="strength-text">
+            {{ validatePasswordStrength(signupPassword()).message }}
+          </span>
+        </div>
+      }
+    </div>
+
+    <div class="input-group">
+      <label>
+        <i class="fas fa-check-circle"></i>
+        Confirm Password
+      </label>
+      <div class="password-wrapper">
+        <input
+          [type]="showConfirmPassword() ? 'text' : 'password'"
+          [(ngModel)]="signupConfirmPassword"
+          name="signupConfirmPassword"
+          placeholder="Confirm your password"
+          required
+          [disabled]="isSigningUp()"
+          autocomplete="new-password"
+        />
+        <button
+          type="button"
+          class="toggle-password"
+          (click)="toggleConfirmPasswordVisibility()"
+          [disabled]="isSigningUp()"
+        >
+          <i [class]="showConfirmPassword() ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+        </button>
+      </div>
+      @if (signupConfirmPassword().length > 0 && signupPassword().length > 0) {
+        <div class="password-match">
+          @if (signupPassword() === signupConfirmPassword()) {
+            <span class="match-success"> <i class="fas fa-check-circle"></i> Passwords match </span>
+          } @else {
+            <span class="match-error">
+              <i class="fas fa-times-circle"></i> Passwords do not match
+            </span>
+          }
+        </div>
+      }
+    </div>
+
+    <div class="terms">
+      <label class="checkbox">
+        <input
+          type="checkbox"
+          [(ngModel)]="agreeTerms"
+          name="agreeTerms"
+          required
+          [disabled]="isSigningUp()"
+        />
+        <span>
+          I agree to the <a href="#">Terms of Service</a> and
+          <a href="#">Privacy Policy</a>
+        </span>
+      </label>
+    </div>
+
+    <button type="submit" class="btn-primary" [disabled]="isSigningUp()">
+      @if (isSigningUp()) {
+        <i class="fas fa-spinner fa-spin"></i>
+        <span>Creating Account...</span>
+      } @else {
+        <span>Get Started</span>
+        <i class="fas fa-rocket"></i>
+      }
+    </button>
+  </form>
+
+  <div class="switch-form">
+    <p>Already have an account?</p>
+    <button type="button" class="switch-btn" (click)="onSwitchToLogin()" [disabled]="isSigningUp()">
+      Sign In <i class="fas fa-sign-in-alt"></i>
+    </button>
+  </div>
+</div>

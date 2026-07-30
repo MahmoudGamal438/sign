@@ -1,0 +1,498 @@
+
+@mixin respond($breakpoint) {
+  @if $breakpoint == xs {
+    @media (max-width: 480px) { @content; }
+  }
+  @if $breakpoint == sm {
+    @media (max-width: 768px) { @content; }
+  }
+  @if $breakpoint == md {
+    @media (max-width: 992px) { @content; }
+  }
+  @if $breakpoint == lg {
+    @media (max-width: 1200px) { @content; }
+  }
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.form-container {
+  width: 100%;
+  max-width: 400px;
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+  @include respond(sm) {
+    max-width: 100%;
+  }
+
+  &.loading {
+    opacity: 0.7;
+    pointer-events: none;
+  }
+}
+
+
+
+.form-header {
+  text-align: center;
+  margin-bottom: 35px;
+
+  @include respond(lg) {
+    margin-bottom: 30px;
+  }
+
+  @include respond(md) {
+    margin-bottom: 25px;
+  }
+
+  @include respond(sm) {
+    margin-bottom: 20px;
+  }
+
+  @include respond(xs) {
+    margin-bottom: 15px;
+  }
+
+  .form-icon {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 50px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin: 0 auto 10px;
+    padding: 10px 20px;
+    color: white;
+    animation: bounce 2s infinite;
+
+    @include respond(sm) {
+      padding: 8px 16px;
+      gap: 10px;
+    }
+
+    @include respond(xs) {
+      padding: 6px 14px;
+      gap: 8px;
+      border-radius: 40px;
+    }
+
+    i {
+      font-size: 20px;
+
+      @include respond(sm) {
+        font-size: 18px;
+      }
+
+      @include respond(xs) {
+        font-size: 16px;
+      }
+    }
+
+    h2 {
+      font-size: 20px;
+      margin: 0;
+      font-weight: 700;
+
+      @include respond(sm) {
+        font-size: 18px;
+      }
+
+      @include respond(xs) {
+        font-size: 16px;
+      }
+    }
+  }
+
+  p {
+    color: #718096;
+    font-size: 14px;
+    margin-top: 8px;
+
+    @include respond(sm) {
+      font-size: 13px;
+      margin-top: 6px;
+    }
+
+    @include respond(xs) {
+      font-size: 12px;
+      margin-top: 4px;
+    }
+  }
+}
+
+
+
+.input-group {
+  margin-bottom: 15px;
+
+  @include respond(sm) {
+    margin-bottom: 12px;
+  }
+
+  @include respond(xs) {
+    margin-bottom: 10px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+    color: #4a5568;
+    font-weight: 500;
+    font-size: 14px;
+
+    @include respond(sm) {
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+
+    @include respond(xs) {
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+
+    i {
+      margin-right: 8px;
+      color: #667eea;
+
+      @include respond(xs) {
+        margin-right: 5px;
+      }
+    }
+  }
+
+  .password-wrapper {
+    position: relative;
+
+    input {
+      padding-right: 45px;
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #a0aec0;
+      cursor: pointer;
+      padding: 8px;
+      font-size: 16px;
+      transition: color 0.3s ease;
+
+      @include respond(sm) {
+        right: 10px;
+        padding: 6px;
+        font-size: 14px;
+      }
+
+      @include respond(xs) {
+        right: 8px;
+        padding: 4px;
+        font-size: 12px;
+      }
+
+      &:hover:not(:disabled) {
+        color: #667eea;
+      }
+
+      &:disabled {
+        cursor: not-allowed;
+        opacity: 0.5;
+      }
+    }
+  }
+
+  input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    font-family: inherit;
+
+    @include respond(sm) {
+      padding: 12px 14px;
+      font-size: 13px;
+      border-radius: 10px;
+    }
+
+    @include respond(xs) {
+      padding: 10px 12px;
+      font-size: 12px;
+      border-radius: 8px;
+      border-width: 1.5px;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    &:disabled {
+      background: #f7fafc;
+      cursor: not-allowed;
+    }
+
+    &.error {
+      border-color: #fc8181;
+      animation: shake 0.3s ease;
+    }
+  }
+}
+
+
+
+.form-footer {
+  @include flex-between;
+  margin-bottom: 28px;
+
+  @include respond(sm) {
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  @include respond(xs) {
+    margin-bottom: 16px;
+    gap: 8px;
+  }
+
+  .checkbox {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: #718096;
+    font-size: 13px;
+
+    @include respond(sm) {
+      font-size: 12px;
+    }
+
+    @include respond(xs) {
+      font-size: 11px;
+    }
+
+    input {
+      margin-right: 8px;
+      cursor: pointer;
+      width: 18px;
+      height: 18px;
+
+      @include respond(xs) {
+        width: 16px;
+        height: 16px;
+        margin-right: 6px;
+      }
+
+      &:disabled {
+        cursor: not-allowed;
+        opacity: 0.5;
+      }
+    }
+  }
+
+  .forgot-link {
+    color: #667eea;
+    text-decoration: none;
+    font-size: 13px;
+    transition: color 0.3s ease;
+
+    @include respond(sm) {
+      font-size: 12px;
+    }
+
+    @include respond(xs) {
+      font-size: 11px;
+    }
+
+    &:hover {
+      color: #764ba2;
+    }
+  }
+}
+
+
+
+.btn-primary {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  @include flex-center;
+  gap: 10px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+
+  @include respond(sm) {
+    padding: 12px;
+    font-size: 15px;
+    border-radius: 10px;
+    gap: 8px;
+  }
+
+  @include respond(xs) {
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 8px;
+    gap: 6px;
+  }
+
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+
+    @include respond(sm) {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 16px rgba(102, 126, 234, 0.25);
+    }
+
+    @include respond(xs) {
+      transform: translateY(0);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+    }
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  i {
+    transition: transform 0.3s ease;
+  }
+
+  &:hover:not(:disabled) i {
+    transform: translateX(5px);
+
+    @include respond(xs) {
+      transform: translateX(3px);
+    }
+  }
+}
+
+
+
+.switch-form {
+  text-align: center;
+  margin-top: 28px;
+  padding-top: 28px;
+  border-top: 1px solid #e2e8f0;
+
+  @include respond(sm) {
+    margin-top: 20px;
+    padding-top: 20px;
+  }
+
+  @include respond(xs) {
+    margin-top: 16px;
+    padding-top: 16px;
+  }
+
+  p {
+    display: inline-block;
+    color: #718096;
+    font-size: 14px;
+    margin-right: 30px;
+
+    @include respond(sm) {
+      font-size: 13px;
+      margin-right: 20px;
+    }
+
+    @include respond(xs) {
+      font-size: 12px;
+      margin-right: 15px;
+      display: block;
+      margin-bottom: 8px;
+    }
+  }
+
+  .switch-btn {
+    background: none;
+    border: none;
+    color: #667eea;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+
+    @include respond(sm) {
+      font-size: 13px;
+    }
+
+    @include respond(xs) {
+      font-size: 12px;
+      display: block;
+      margin: 0 auto;
+    }
+
+    &:hover:not(:disabled) {
+      color: #764ba2;
+      transform: translateX(3px);
+
+      @include respond(xs) {
+        transform: translateX(0);
+      }
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    i {
+      margin-left: 5px;
+
+      @include respond(xs) {
+        margin-left: 3px;
+      }
+    }
+  }
+}
+
+
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+}

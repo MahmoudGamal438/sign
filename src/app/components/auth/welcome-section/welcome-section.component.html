@@ -1,0 +1,33 @@
+<div class="welcome-card" [class]="getAnimationClass()">
+  <div class="brand">
+    <div class="logo">
+      <!-- <i class="fas fa-gem"></i> -->
+      <h1 class="brand-name">ElSeady</h1>
+    </div>
+  </div>
+
+  <div class="welcome-message">
+    <h2>{{ welcomeTitle() }}</h2>
+    <p>{{ welcomeText() }}</p>
+  </div>
+
+  <div class="welcome-quote">
+    <i class="fas fa-quote-left"></i>
+    <p>{{ welcomeQuote() }}</p>
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number" data-value="10000">10K+</span>
+      <span class="stat-label">Active Users</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number" data-value="99">99%</span>
+      <span class="stat-label">Satisfaction</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number" data-value="24">24/7</span>
+      <span class="stat-label">Support</span>
+    </div>
+  </div>
+</div>
